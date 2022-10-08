@@ -1,6 +1,7 @@
 //SPDX-License-Identifier: UNLICENSED
 
 pragma solidity ^0.8.9;
+error Balance_SAGIsNotEnough();
 
 interface ERC20Interface {
     function totalSupply() external view returns (uint256);
@@ -18,8 +19,8 @@ contract SageIco is ERC20Interface{
     // First create SAGE ERC20 Token
    
     // Define state variables
-    uint256 public name;
-    uint256 public symbol;
+    string public name;
+    string public symbol;
     uint256 public decimals;
     uint256 public override totalSupply;
     address private _founder;
@@ -27,8 +28,27 @@ contract SageIco is ERC20Interface{
 
     constructor(){
         _founder = msg.sender;
-        // totalSupply = 
+        name = "SAGECOIN";
+        symbol = "SAG";
+        decimals = 10;
+        totalSupply = 100000000000;
+        balances[_founder] = totalSupply;
     }
+
+    function balanceOf(address tokenOwner) public override view returns (uint256 balance){
+            return balances[tokenOwner];
+    }
+
+    function transfer(address to, uint256 tokens) public override returns (bool success){
+        if(balances[msg.sender] < tokens){
+            revert Balance_SAGIsNotEnough();
+        }
+        balances[to] += tokens;
+        balances[_founder] -=tokens;
+        emit Transfer(msg.sender, to, tokens);
+        return true;
+    }
+
     
     // Secondly create an ICO functionality
 }
