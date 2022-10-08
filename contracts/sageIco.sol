@@ -26,8 +26,8 @@ contract SageIco is ERC20Interface{
     mapping(address => uint) public balances;
 
     constructor(){
-        _owner = msg.sender;
-        totalSupply = 
+        _founder = msg.sender;
+        // totalSupply = 
     }
     
     // Secondly create an ICO functionality
