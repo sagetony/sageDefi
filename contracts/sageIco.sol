@@ -25,6 +25,7 @@ contract SageIco is ERC20Interface{
     uint256 public override totalSupply;
     address private _founder;
     mapping(address => uint) public balances;
+    mapping(address => mapping(address => uint)) allowed;
 
     constructor(){
         _founder = msg.sender;
@@ -48,6 +49,32 @@ contract SageIco is ERC20Interface{
         emit Transfer(msg.sender, to, tokens);
         return true;
     }
+    function allowance(address owner, address spender) public override view returns (uint256 remaining){
+            return allowed[owner][spender];
+    }
+
+    function approve(address spender, uint256 tokens) public override returns (bool success){
+        if(balances[msg.sender] < tokens && balances[msg.sender] == 0){
+            revert Balance_SAGIsNotEnough();
+        }
+        allowed[msg.sender][spender] += tokens;
+        emit Approval(msg.sender, spender, tokens);
+        return true;
+    }
+
+    function transferFrom(address from, address to, uint256 tokens) public override returns (bool success){
+        if(balances[msg.sender] < tokens && balances[msg.sender] == 0){
+            revert Balance_SAGIsNotEnough();
+        }
+        balances[to] += tokens;
+        allowed[from][msg.sender] -= tokens;
+        balances[from] -=tokens;
+
+        emit Transfer(from, to, tokens);
+        return true;
+    }
+
+
 
     
     // Secondly create an ICO functionality
