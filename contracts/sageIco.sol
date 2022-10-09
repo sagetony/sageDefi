@@ -15,7 +15,7 @@ interface ERC20Interface {
     event Transfer(address indexed _from, address indexed _to, uint256 _value);
     event Approval(address indexed _owner, address indexed _spender, uint256 _value);
 }
-contract SageIco is ERC20Interface{
+contract SageToken is ERC20Interface{
     // First create SAGE ERC20 Token
    
     // Define state variables
@@ -72,10 +72,28 @@ contract SageIco is ERC20Interface{
 
         emit Transfer(from, to, tokens);
         return true;
+    }    
+}
+// Secondly create an ICO functionality
+
+contract SageIco is SageToken{
+    // define state variable
+    // * accounts, ethAmount, hardcap, tokenAmount, maximumAmount, adminAddress, stateofContract, icoStartTime, icoEndTime/
+    enum IcoState {
+        START, STOP, END
     }
 
+    mapping(address => uint256) private e_accounts;
+    uint256 private s_ethAmount;
+    uint256 private s_hardcap;
+    uint256 private s_tokenAmount;
+    uint256 private s_maximumAmount;
+    address private s_adminAddress;
+    IcoState private s_icostate;
+    uint256 private icoStartTime;
+    uint256 private icoEndTime;
 
-
+    event ethAmount(uint256 indexed amount);
+    event tokenAmount(uint256 indexed tokens);
     
-    // Secondly create an ICO functionality
 }
