@@ -80,20 +80,69 @@ contract SageIco is SageToken{
     // define state variable
     // * accounts, ethAmount, hardcap, tokenAmount, maximumAmount, adminAddress, stateofContract, icoStartTime, icoEndTime/
     enum IcoState {
-        START, STOP, END
+        NEVERSTART, START, STOP, END
     }
 
-    mapping(address => uint256) private e_accounts;
-    uint256 private s_ethAmount;
-    uint256 private s_hardcap;
+    mapping(address => uint256) private s_userBalances;
+    address [] private s_accounts;
+    uint256 private i_ethAmount;
+    uint256 private i_hardcap;
     uint256 private s_tokenAmount;
     uint256 private s_maximumAmount;
     address private s_adminAddress;
     IcoState private s_icostate;
-    uint256 private icoStartTime;
-    uint256 private icoEndTime;
+    uint256 private s_icoStartTime;
+    uint256 private s_icoEndTime;
+    address private s_owner;
 
     event ethAmount(uint256 indexed amount);
     event tokenAmount(uint256 indexed tokens);
+
+    constructor(){
+        i_ethAmount = 0.001 ether;
+        i_hardcap = 200 ether;
+        s_maximumAmount = 1 ether;
+        s_icostate = IcoState.NEVERSTART;
+        s_icoStartTime = block.timestamp + 86400 ;
+        s_icoEndTime = block.timestamp + 604800;
+        s_owner = msg.sender;
+    }
+
+    modifier onlyOwner(){
+        require(msg.sender == s_owner);
+        _;
+    } 
+
+    function addpaymentAddress(address adminAddress) public onlyOwner view returns (address) {
+        adminAddress = s_adminAddress;
+        return adminAddress;
+    }
     
+    function getowner() public view returns (address){
+        return s_owner;
+    }
+
+    function getEthAmount() public view returns (uint256){
+        return i_ethAmount;
+    }
+
+    function gethardcap() public view returns (uint256){
+        return i_hardcap;
+    }
+
+    function gettokenAmount() public view returns (uint256){
+        return s_tokenAmount;
+    }
+    function getmaximumAmount() public view returns (uint256){
+        return s_maximumAmount;
+    }
+    function getadminAddress() public view returns (address){
+        return s_adminAddress;
+    }
+
+     function geticostate () public view returns (IcoState){
+        return  s_icostate ;
+     }
+
+     
 }
