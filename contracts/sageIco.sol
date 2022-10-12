@@ -80,32 +80,38 @@ contract SageIco is SageToken{
     // define state variable
     // * accounts, ethAmount, hardcap, tokenAmount, maximumAmount, adminAddress, stateofContract, icoStartTime, icoEndTime/
     enum IcoState {
-        NEVERSTART, START, STOP, END
+        NEVERSTART, START, HALT, END
     }
 
     mapping(address => uint256) private s_userBalances;
+    IcoState private s_icostate;
     address [] private s_accounts;
     uint256 private i_ethAmount;
     uint256 private i_hardcap;
     uint256 private s_tokenAmount;
+    uint256 private s_minimum;
     uint256 private s_maximumAmount;
-    address private s_adminAddress;
-    IcoState private s_icostate;
+    uint256 private s_raisedAmount;
     uint256 private s_icoStartTime;
     uint256 private s_icoEndTime;
+    address private s_adminAddress;
     address private s_owner;
-
+    address private s_deposit;
+    
     event ethAmount(uint256 indexed amount);
     event tokenAmount(uint256 indexed tokens);
 
-    constructor(){
+    constructor(address payable depositAddress){
         i_ethAmount = 0.001 ether;
+        s_raisedAmount = 
         i_hardcap = 200 ether;
-        s_maximumAmount = 1 ether;
+        s_minimum = 1 ether;
+        s_maximumAmount = 6 ether;
         s_icostate = IcoState.NEVERSTART;
         s_icoStartTime = block.timestamp + 86400 ;
         s_icoEndTime = block.timestamp + 604800;
         s_owner = msg.sender;
+        s_deposit = depositAddress;
     }
 
     modifier onlyOwner(){
@@ -113,11 +119,42 @@ contract SageIco is SageToken{
         _;
     } 
 
-    function addpaymentAddress(address adminAddress) public onlyOwner view returns (address) {
-        adminAddress = s_adminAddress;
-        return adminAddress;
+    function addpaymentAddress(address payable adminAddress) public onlyOwner () {
+        s_deposit = adminAddress;
     }
-    
+
+    function haltICO() public onlyOwner () {
+        s_icostate = IcoState.HALT;
+    }
+
+    function endICO() public onlyOwner(){
+        s_icostate = IcoState.END;
+    }
+
+    function resumeICO() public onlyOwner(){
+        s_icostate = IcoState.START;
+    }
+
+    function icoCurrentState () public view returns (IcoState){
+        if(block.timestamp < s_icoStartTime){
+            return IcoState.NEVERSTART;
+        }else if(block.timestamp >= s_icoStartTime && block.timestamp < s_icoEndTime ){
+            return IcoState.START;
+        }else if(s_icostate == IcoState.HALT ){
+            return IcoState.HALT;
+        }else{
+            return IcoState.END;
+        }
+    }
+    function invest(uint256 amount) payable public returns (bool){
+        require(amount >= s_minimum, 'Insufficient Amount');
+        require(s_icostate == IcoState.START, 'ICO has not start!! Contact Admin');
+        require(i_hardcap == 200 ether, 'ICO has ended');
+        require(s_userBalances[msg.sender] < s_maximumAmount, 'Exceed Maximum Amount');
+        
+
+
+    }
     function getowner() public view returns (address){
         return s_owner;
     }
