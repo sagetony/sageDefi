@@ -23,7 +23,7 @@ contract SageToken is ERC20Interface{
     string public symbol;
     uint256 public decimals;
     uint256 public override totalSupply;
-    address private _founder;
+    address public _founder;
     mapping(address => uint) public balances;
     mapping(address => mapping(address => uint)) allowed;
 
@@ -96,14 +96,15 @@ contract SageIco is SageToken{
     uint256 private s_icoEndTime;
     address private s_adminAddress;
     address private s_owner;
-    address private s_deposit;
+    address payable private s_deposit;
     
     event ethAmount(uint256 indexed amount);
     event tokenAmount(uint256 indexed tokens);
+    event ICOInvest(uint256 indexed amount, address indexed sender, uint256 indexed tokens);
 
     constructor(address payable depositAddress){
-        i_ethAmount = 0.001 ether;
-        s_raisedAmount = 
+        i_ethAmount = 0.01 ether;
+        s_raisedAmount = 0;
         i_hardcap = 200 ether;
         s_minimum = 1 ether;
         s_maximumAmount = 6 ether;
@@ -152,7 +153,13 @@ contract SageIco is SageToken{
         require(i_hardcap == 200 ether, 'ICO has ended');
         require(s_userBalances[msg.sender] < s_maximumAmount, 'Exceed Maximum Amount');
         
+        uint256 tokens = amount/i_ethAmount;
+        balances[msg.sender] += tokens;
+        balances[_founder] -=tokens;
+        s_deposit.transfer(amount); 
+        emit ICOInvest(amount, msg.sender, tokens);
 
+        return true;
 
     }
     function getowner() public view returns (address){
