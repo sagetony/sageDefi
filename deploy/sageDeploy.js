@@ -21,7 +21,7 @@ module.exports = async (hre) => {
         await verify(sageICO.address, args)
     }
 
-    log("Successful Deployed....")
+    log("Successful Deployed")
 }
 
 module.exports.tags = ["all", "sageICO"]
