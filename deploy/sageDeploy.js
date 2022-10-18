@@ -20,7 +20,7 @@ module.exports = async (hre) => {
     if (!developmentChain.includes(network.name) && process.env.ETHERSCAN_API_KEY) {
         await verify(sageICO.address, args)
     }
-
+    console.log({ deployer })
     log("Successful Deployed")
 }
 

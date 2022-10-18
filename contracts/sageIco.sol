@@ -83,13 +83,13 @@ contract SageIco is SageToken{
         NEVERSTART, START, HALT, END
     }
 
-    mapping(address => uint256) private s_userBalances;
+    mapping(address => uint256) public s_userBalances;
     IcoState private s_icostate;
     address [] private s_accounts;
     uint256 private i_ethAmount;
     uint256 private i_hardcap;
     uint256 private s_tokenAmount;
-    uint256 private s_minimum;
+    uint256 public s_minimum;
     uint256 private s_maximumAmount;
     uint256 private s_raisedAmount;
     uint256 private s_icoStartTime;
