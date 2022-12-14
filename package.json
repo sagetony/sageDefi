@@ -27,6 +27,7 @@
     "typechain": "^8.1.0"
   },
   "dependencies": {
+    "@openzeppelin/contracts": "^4.8.0",
     "prettierrc": "^0.0.0-5"
   }
 }
