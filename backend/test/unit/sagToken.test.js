@@ -79,19 +79,16 @@ describe("SageToken", function () {
                     (await sagetoken.totalSupply()).toString()
                 )
 
-                console.log(toWei(2))
-                console.log(".......")
-
                 // My ICOInvest Test
-                expect(await sageico.connect(deployer).ICOInvest(amount))
+                expect(await sageico.connect(address1).ICOInvest({ value: amount }))
                     .to.emit(sageico, "Invest")
-                    .withArgs(amount, numberoftokens, deployer.address)
+                    .withArgs(amount, numberoftokens, address1.address)
                 numberoftokens = amount / (await sageico.getTokenAmount()).toString()
-
+                // console.log((await sageico.balances(address1.address)).toString())
                 expect((await sageico.balances(deployer.address)).toString()).to.not.equal(
                     (await sagetoken.totalSupply()).toString()
                 )
-                expect((await sageico.balances(address2.address)).toString()).to.be.equal(
+                expect((await sageico.balances(address1.address)).toString()).to.be.equal(
                     numberoftokens.toString()
                 )
             })

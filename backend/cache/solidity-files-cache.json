@@ -46,8 +46,8 @@
       ]
     },
     "C:\\BlockchainProject\\SageICO\\contracts\\SageToken.sol": {
-      "lastModificationDate": 1670598224714,
-      "contentHash": "b134a4d777f497a926a129be09a6e290",
+      "lastModificationDate": 1671205108242,
+      "contentHash": "ed6f10765eafed76ac4d2c81a72d9369",
       "sourceName": "contracts/SageToken.sol",
       "solcConfig": {
         "version": "0.8.9",
@@ -132,8 +132,8 @@
       ]
     },
     "C:\\BlockchainProject\\SageICO\\contracts\\SageExchange.sol": {
-      "lastModificationDate": 1671035500675,
-      "contentHash": "7d0fa612c0251f210982af0850aa5dbd",
+      "lastModificationDate": 1671126897501,
+      "contentHash": "c50641f9600afab88a1ddf979d7215cc",
       "sourceName": "contracts/SageExchange.sol",
       "solcConfig": {
         "version": "0.8.9",

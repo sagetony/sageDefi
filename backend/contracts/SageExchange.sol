@@ -28,6 +28,7 @@ contract SageExchange is SageToken, ReentrancyGuard{
     event Invest(uint256 amount, uint256 tokens, address indexed buyer);
 
     constructor (address payable _admin){
+
         s_admin = _admin;
         s_tokenprice = 0.001 ether;
         s_hardcap = 5 ether;
@@ -76,7 +77,8 @@ contract SageExchange is SageToken, ReentrancyGuard{
         }
     }
         
-    function ICOInvest(uint256 amount) external  nonReentrant returns(bool){
+    function ICOInvest() payable external  nonReentrant returns(bool){
+        uint256 amount = msg.value;
         require(amount >= s_minimum, "Enter a Valid Amount, Minimum amount is 0.001 ETH");
         require(s_userBalances[msg.sender] <= s_maximum, "Exceed you limit for the ICO");
         require(s_hardcap >= s_totalamountdeposited, "ICO has Closed");

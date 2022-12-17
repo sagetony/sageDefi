@@ -1,16 +1,19 @@
 async function main() {
     const [deployer, address1, address2] = await ethers.getSigners()
 
-    console.log("Deploying contracts with the account:", address2.address)
-    console.log("Account balance:", (await deployer.getBalance()).toString())
-    console.log("Account balance:", (await address1.getBalance()).toString())
+    // console.log("Deploying contracts with the account:", address2.address)
+    // console.log("Account balance:", (await deployer.getBalance()).toString())
+    // console.log("Account balance:", (await address1.getBalance()).toString())
     // 0x70997970C51812dc3A010C7d01b50e0d17dc79C8 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC
     // Get the ContractFactories and Signers here.
     const Token = await ethers.getContractFactory("SageToken")
     const SageICO = await ethers.getContractFactory("SageExchange")
     // deploy contracts
-    await Token.deploy()
-    await SageICO.deploy("0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266")
+    const token = await Token.deploy()
+    const sageico = await SageICO.deploy("0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266")
+
+    console.log("Deploying contracts with the Token account:", token.address)
+    console.log("Deploying contracts with the Sageico account:", sageico.address)
 
     // Save copies of each contracts abi and address to the frontend.
     // saveFrontendFiles(token, "Token")
