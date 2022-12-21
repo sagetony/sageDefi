@@ -8,12 +8,16 @@ async function main() {
     // Get the ContractFactories and Signers here.
     const Token = await ethers.getContractFactory("SageToken")
     const SageICO = await ethers.getContractFactory("SageExchange")
+    const Staking = await ethers.getContractFactory("Staking")
+
     // deploy contracts
     const token = await Token.deploy()
     const sageico = await SageICO.deploy("0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266")
+    const staking = await Staking.deploy(token.address, token.address)
 
     console.log("Deploying contracts with the Token account:", token.address)
     console.log("Deploying contracts with the Sageico account:", sageico.address)
+    console.log("Deploying contracts with the Staking account:", staking.address)
 
     // Save copies of each contracts abi and address to the frontend.
     // saveFrontendFiles(token, "Token")

@@ -27,7 +27,7 @@ contract SageToken is IERC20{
         name = 'SAGE';
         symbol = 'SAG';
         decimals = 10;
-        totalSupply = 100000000000000000000;
+        totalSupply =  10000000 * 10**18;
         balances[owner] = totalSupply;
     }
      // modifiers

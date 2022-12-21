@@ -62,8 +62,8 @@ contract Staking is ReentrancyGuard{
     // Add to the user balance
     // transfer to the contract
     // Emit the amount staked and the address
-
-    function Stake(uint256 _amount) external nonReentrant UpdateReward(msg.sender){
+// UpdateReward(msg.sender)
+    function Stake(uint256 _amount) external nonReentrant {
         if(_amount == 0){
             revert Transfer_Failed();
         }

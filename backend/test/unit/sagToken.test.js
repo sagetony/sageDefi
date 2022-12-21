@@ -1,26 +1,38 @@
 const { expect, assert } = require("chai")
 const { ethers } = require("hardhat")
-const toWei = (num) => ethers.utils.parseEther(num.toString())
-const fromWei = (num) => ethers.utils.formatEther(num)
+const { moveBlocks } = require("../../utils/move-blocks")
+const { moveTime } = require("../../utils/move-time")
+const SECONDS_IN_A_DAY = 86400
+const SECONDS_IN_A_YEAR = 31449600
 
 describe("SageToken", function () {
-    let SageToken, sagetoken, address1, address2, address3, deployer, sageICO, sageico
+    let SageToken,
+        sagetoken,
+        address1,
+        address2,
+        address3,
+        deployer,
+        sageICO,
+        sageico,
+        Staking,
+        staking
     beforeEach(async function () {
         // Get the ContractFactories and Signers here.
         SageToken = await ethers.getContractFactory("SageToken")
         ;[deployer, address1, address2, address3] = await ethers.getSigners()
-
         sageICO = await ethers.getContractFactory("SageExchange")
+        Staking = await ethers.getContractFactory("Staking")
 
         // deploy contract
         sagetoken = await SageToken.deploy()
         sageico = await sageICO.deploy("0x90F79bf6EB2c4f870365E785982E1f101E93b906")
+        staking = await Staking.deploy(sagetoken.address, sagetoken.address)
 
         // Deployer Address
         // deployer = sagetoken.address
     })
-    describe("Contructor", function () {
-        const supply = 100000000000000000000
+    describe("Constructor for SageICO", function () {
+        const supply = 10000000 * 10 ** 18
         const name = "SAGE"
         const symbol = "SAG"
         it("Should be able to know the name, symbol, totalSupply and balance of the founder", async function () {
@@ -60,41 +72,55 @@ describe("SageToken", function () {
                 .withArgs(deployer.address, address2.address, 3)
             assert.equal((await sagetoken.balanceOf(address2.address)).toString(), 3)
         })
-        describe("Sage ICO Contract", function () {
-            it("Change Admin Adress", async function () {
-                await sageico.connect(deployer).changeAdminAdress(address1.address)
-                expect(await sageico.s_adminaddress(deployer.address)).to.be.equal(
-                    (await sageico.getAmountDeposit()).toString()
-                )
-                expect(await sageico.s_adminaddress(deployer.address)).to.be.equal(0)
-                expect(await sageico.getowner(), address1.address)
-                    .to.emit(sageico, "UpdatedadminAdress")
-                    .withArgs(address1.address)
-            })
-            it("ICO Invest", async function () {
-                let amount = ethers.utils.parseEther("0.001")
-                let numberoftokens
-                // await sageico.connect(deployer).changeICOState("START")
-                expect((await sageico.balances(deployer.address)).toString()).to.equal(
-                    (await sagetoken.totalSupply()).toString()
-                )
+    })
+    describe("Sage ICO Contract", function () {
+        it("Change Admin Adress", async function () {
+            await sageico.connect(deployer).changeAdminAdress(address1.address)
+            expect(await sageico.s_adminaddress(deployer.address)).to.be.equal(
+                (await sageico.getAmountDeposit()).toString()
+            )
+            expect(await sageico.s_adminaddress(deployer.address)).to.be.equal(0)
+            expect(await sageico.getowner(), address1.address)
+                .to.emit(sageico, "UpdatedadminAdress")
+                .withArgs(address1.address)
+        })
+        it("ICO Invest", async function () {
+            let amount = ethers.utils.parseEther("0.001")
+            let numberoftokens
+            // await sageico.connect(deployer).changeICOState("START")
+            expect((await sageico.balances(deployer.address)).toString()).to.equal(
+                (await sagetoken.totalSupply()).toString()
+            )
 
-                // My ICOInvest Test
-                expect(await sageico.connect(address1).ICOInvest({ value: amount }))
-                    .to.emit(sageico, "Invest")
-                    .withArgs(amount, numberoftokens, address1.address)
-                numberoftokens = amount / (await sageico.getTokenAmount()).toString()
-                // console.log((await sageico.balances(address1.address)).toString())
-                expect((await sageico.balances(deployer.address)).toString()).to.not.equal(
-                    (await sagetoken.totalSupply()).toString()
-                )
-                expect((await sageico.balances(address1.address)).toString()).to.be.equal(
-                    numberoftokens.toString()
-                )
-            })
+            // My ICOInvest Test
+            expect(await sageico.connect(address1).ICOInvest({ value: amount }))
+                .to.emit(sageico, "Invest")
+                .withArgs(amount, numberoftokens, address1.address)
+            numberoftokens = amount / (await sageico.getTokenAmount()).toString()
+            // console.log((await sageico.balances(address1.address)).toString())
+            expect((await sageico.balances(deployer.address)).toString()).to.not.equal(
+                (await sagetoken.totalSupply()).toString()
+            )
+            expect((await sageico.balances(address1.address)).toString()).to.be.equal(
+                numberoftokens.toString()
+            )
+        })
+    })
+
+    describe("Constructor For Staking", function () {
+        it("Verify That the addresses are from the token and the owner is valid", async function () {
+            expect(await staking.StakingToken()).to.be.equal(sagetoken.address)
+            expect(await staking.RewardToken()).to.be.equal(sagetoken.address)
+            expect(await staking.s_owner()).to.be.equal(deployer.address)
+        })
+    })
+
+    describe("Staking Contract Functions", function () {
+        it("Stake Function", async function () {
+            let amount = ethers.utils.parseEther("1000")
+            await sagetoken.approve(staking.address, amount)
+            await staking.Stake(amount)
+            // console.log("........")
         })
     })
 })
-// console.log(amount.toString())
-// console.log("............")
-// console.log((await sageico.balances(deployer.address)).toString())

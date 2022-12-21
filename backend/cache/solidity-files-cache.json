@@ -1,137 +1,7 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "C:\\BlockchainProject\\SageICO\\contracts\\sageIco.sol": {
-      "lastModificationDate": 1670367867192,
-      "contentHash": "1487f42a3764d129db15d702d6f199f6",
-      "sourceName": "contracts/sageIco.sol",
-      "solcConfig": {
-        "version": "0.8.9",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "devdoc",
-                "userdoc",
-                "storageLayout",
-                "evm.gasEstimates"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "metadata": {
-            "useLiteralContent": true
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.9"
-      ],
-      "artifacts": [
-        "ERC20Interface",
-        "SageIco",
-        "SageTokens"
-      ]
-    },
-    "C:\\BlockchainProject\\SageICO\\contracts\\SageToken.sol": {
-      "lastModificationDate": 1671205108242,
-      "contentHash": "ed6f10765eafed76ac4d2c81a72d9369",
-      "sourceName": "contracts/SageToken.sol",
-      "solcConfig": {
-        "version": "0.8.9",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "devdoc",
-                "userdoc",
-                "storageLayout",
-                "evm.gasEstimates"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "metadata": {
-            "useLiteralContent": true
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts/token/ERC20/IERC20.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "SageToken"
-      ]
-    },
-    "C:\\BlockchainProject\\SageICO\\node_modules\\@openzeppelin\\contracts\\token\\ERC20\\IERC20.sol": {
-      "lastModificationDate": 1669389196561,
-      "contentHash": "ad7c2d0af148c8f9f097d65deeb4da6b",
-      "sourceName": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
-      "solcConfig": {
-        "version": "0.8.9",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "devdoc",
-                "userdoc",
-                "storageLayout",
-                "evm.gasEstimates"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "metadata": {
-            "useLiteralContent": true
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "IERC20"
-      ]
-    },
-    "C:\\BlockchainProject\\SageICO\\contracts\\SageExchange.sol": {
+    "C:\\BlockchainProject\\SageICO\\backend\\contracts\\SageExchange.sol": {
       "lastModificationDate": 1671126897501,
       "contentHash": "c50641f9600afab88a1ddf979d7215cc",
       "sourceName": "contracts/SageExchange.sol",
@@ -176,7 +46,51 @@
         "SageExchange"
       ]
     },
-    "C:\\BlockchainProject\\SageICO\\node_modules\\@openzeppelin\\contracts\\security\\ReentrancyGuard.sol": {
+    "C:\\BlockchainProject\\SageICO\\backend\\contracts\\SageToken.sol": {
+      "lastModificationDate": 1671611190640,
+      "contentHash": "d44c8a4cceaed522e0011a407f689ade",
+      "sourceName": "contracts/SageToken.sol",
+      "solcConfig": {
+        "version": "0.8.9",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC20/IERC20.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "SageToken"
+      ]
+    },
+    "C:\\BlockchainProject\\SageICO\\backend\\node_modules\\@openzeppelin\\contracts\\security\\ReentrancyGuard.sol": {
       "lastModificationDate": 1669389196737,
       "contentHash": "a8e2d1c30042f64ed89c9d4157eb6cb9",
       "sourceName": "@openzeppelin/contracts/security/ReentrancyGuard.sol",
@@ -218,10 +132,10 @@
         "ReentrancyGuard"
       ]
     },
-    "C:\\BlockchainProject\\SageICO\\contracts\\Staking.sol": {
-      "lastModificationDate": 1670922234138,
-      "contentHash": "469c880cdabcf6d9e01f9bcd8ef00c5f",
-      "sourceName": "contracts/Staking.sol",
+    "C:\\BlockchainProject\\SageICO\\backend\\node_modules\\@openzeppelin\\contracts\\token\\ERC20\\IERC20.sol": {
+      "lastModificationDate": 1669389196561,
+      "contentHash": "ad7c2d0af148c8f9f097d65deeb4da6b",
+      "sourceName": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
       "solcConfig": {
         "version": "0.8.9",
         "settings": {
@@ -257,7 +171,96 @@
         "^0.8.0"
       ],
       "artifacts": [
+        "IERC20"
+      ]
+    },
+    "C:\\BlockchainProject\\SageICO\\backend\\contracts\\Staking.sol": {
+      "lastModificationDate": 1671609767017,
+      "contentHash": "ac7ab90c49ee6f0bca68951dcef6a6bb",
+      "sourceName": "contracts/Staking.sol",
+      "solcConfig": {
+        "version": "0.8.9",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/security/ReentrancyGuard.sol",
+        "@openzeppelin/contracts/token/ERC20/IERC20.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
         "Staking"
+      ]
+    },
+    "C:\\BlockchainProject\\SageICO\\backend\\contracts\\sageIco.sol": {
+      "lastModificationDate": 1670367867192,
+      "contentHash": "1487f42a3764d129db15d702d6f199f6",
+      "sourceName": "contracts/sageIco.sol",
+      "solcConfig": {
+        "version": "0.8.9",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.9"
+      ],
+      "artifacts": [
+        "ERC20Interface",
+        "SageIco",
+        "SageTokens"
       ]
     }
   }
