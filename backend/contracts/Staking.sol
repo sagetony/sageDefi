@@ -5,6 +5,7 @@ import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 error Transfer_Failed();
+error NeedsMoreThanZero();
 
 contract Staking is ReentrancyGuard{
     // @dev State Variables
@@ -39,9 +40,18 @@ contract Staking is ReentrancyGuard{
         _;
     }
 
+      modifier moreThanZero(uint256 _amount) {
+        if (_amount == 0) {
+
+            revert NeedsMoreThanZero();
+        }
+        _;
+      }
+
+    // @dev Functions
     function rewardPerToken() public view returns (uint256){
         if(s_totalSupply == 0){
-            revert Transfer_Failed();
+            return s_rewardPerTokenStored;
         }
         return s_rewardPerTokenStored + ((( block.timestamp - lastUpdatedtime) * s_rewardRate * 1e18 ) / s_totalSupply);
     }
@@ -62,19 +72,16 @@ contract Staking is ReentrancyGuard{
     // Add to the user balance
     // transfer to the contract
     // Emit the amount staked and the address
-// UpdateReward(msg.sender)
-    function Stake(uint256 _amount) external nonReentrant {
-        if(_amount == 0){
-            revert Transfer_Failed();
-        }
+//  UpdateReward(msg.sender)
+    function Stake(uint256 _amount) external UpdateReward(msg.sender) nonReentrant moreThanZero(_amount){
+       
         s_totalSupply += _amount;
         s_balances[msg.sender] += _amount;
-
+        emit StakingEvent(_amount, msg.sender);
         bool success = StakingToken.transferFrom(msg.sender, address(this), _amount);
         if(!success){
             revert Transfer_Failed();
         }
-        emit StakingEvent(_amount, msg.sender);
 
     }
 
@@ -90,8 +97,8 @@ contract Staking is ReentrancyGuard{
         }
         s_totalSupply -= _amount;
         s_balances[msg.sender] -= _amount;
-        bool success = StakingToken.transferFrom(address(this), msg.sender, _amount);
-
+        bool success = StakingToken.transfer(msg.sender, _amount);
+        
         if(!success){
             revert Transfer_Failed();
         }

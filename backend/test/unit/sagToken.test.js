@@ -116,11 +116,69 @@ describe("SageToken", function () {
     })
 
     describe("Staking Contract Functions", function () {
+        it("reward Per Token", async function () {
+            let amount = ethers.utils.parseEther("100000")
+            await sagetoken.approve(staking.address, amount)
+
+            await staking.Stake(amount)
+
+            await moveTime(SECONDS_IN_A_DAY)
+            await moveBlocks(1)
+            const reward = await staking.rewardPerToken()
+            const expectedReward = 86
+            assert.equal(reward.toString(), expectedReward)
+
+            await moveTime(SECONDS_IN_A_YEAR)
+            await moveBlocks(1)
+            const rewardYear = await staking.rewardPerToken()
+            const expectedRewardYear = "31536"
+            assert.equal(rewardYear.toString(), expectedRewardYear)
+        })
         it("Stake Function", async function () {
-            let amount = ethers.utils.parseEther("1000")
+            let amount = ethers.utils.parseEther("100000")
+            await sagetoken.approve(staking.address, amount)
+            // await staking.Stake(amount)
+            expect(await staking.Stake(amount))
+                .to.emit(staking, "Stake")
+                .withArgs(amount, deployer.address)
+            await moveTime(SECONDS_IN_A_DAY)
+            await moveBlocks(1)
+            const reward = await staking.rewardPerToken()
+            const expectedReward = 86
+            assert.equal(reward.toString(), expectedReward)
+
+            await moveTime(SECONDS_IN_A_YEAR)
+            await moveBlocks(1)
+            const rewardYear = await staking.rewardPerToken()
+            const expectedRewardYear = "31536"
+            assert.equal(rewardYear.toString(), expectedRewardYear)
+        })
+
+        it("Withdraw Function", async function () {
+            let amount = ethers.utils.parseEther("100000")
             await sagetoken.approve(staking.address, amount)
             await staking.Stake(amount)
-            // console.log("........")
+            await moveTime(SECONDS_IN_A_DAY)
+            await moveBlocks(1)
+            const earning = await staking.earned(deployer.address)
+            const expectedReward = 86
+            const beforeStaking = await sagetoken.balanceOf(deployer.address)
+            await staking.Withdraw(amount)
+            const afterWithdraw = await sagetoken.balanceOf(deployer.address)
+            expect(earning.toString(), expectedReward).to.be.equal
+            assert.equal(afterWithdraw.toString(), beforeStaking.add(amount).toString())
+        })
+        it("Claiming Function", async function () {
+            let amount = ethers.utils.parseEther("100000")
+            await sagetoken.approve(staking.address, amount)
+            await staking.Stake(amount)
+            await moveTime(SECONDS_IN_A_DAY)
+            await moveBlocks(1)
+            const reward = await staking.rewardPerToken()
+            const expectedReward = 86
+            assert.equal(reward.toString(), expectedReward)
+            await staking.Claim()
+            assert.equal((await staking.s_rewards(deployer.address)).toString(), 0)
         })
     })
 })

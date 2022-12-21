@@ -175,8 +175,8 @@
       ]
     },
     "C:\\BlockchainProject\\SageICO\\backend\\contracts\\Staking.sol": {
-      "lastModificationDate": 1671609767017,
-      "contentHash": "ac7ab90c49ee6f0bca68951dcef6a6bb",
+      "lastModificationDate": 1671648509477,
+      "contentHash": "a21325059b56e8df3051b55296ea8610",
       "sourceName": "contracts/Staking.sol",
       "solcConfig": {
         "version": "0.8.9",
