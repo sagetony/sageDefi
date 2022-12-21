@@ -31,7 +31,31 @@ contract Staking is ReentrancyGuard{
     }
 
     //  @dev modifier
-    
+    modifier UpdateReward(address account) {
+        s_rewardPerTokenStored = rewardPerToken();
+        lastUpdatedtime = block.timestamp;
+        s_rewards[account] = earned(account);
+        s_userRewardPerToken[account] = s_rewardPerTokenStored;
+        _;
+    }
+
+    function rewardPerToken() public view returns (uint256){
+        if(s_totalSupply == 0){
+            revert Transfer_Failed();
+        }
+        return s_rewardPerTokenStored + ((( block.timestamp - lastUpdatedtime) * s_rewardRate * 1e18 ) / s_totalSupply);
+    }
+
+    function earned(address account) public view returns (uint256){
+        uint256 userBalance = s_balances[account];
+        uint256 rewardToken = rewardPerToken();
+        uint256 userRewardPerTokenPaid = s_userRewardPerToken[account];
+        uint256 rewards =  s_rewards[account];
+
+        return ((userBalance * (rewardToken - userRewardPerTokenPaid))/ 1e18) + rewards;
+
+    }
+
 
     // @dev Stake Function
     // Function shoud be able to add to total supply
@@ -39,7 +63,7 @@ contract Staking is ReentrancyGuard{
     // transfer to the contract
     // Emit the amount staked and the address
 
-    function Stake(uint256 _amount) external nonReentrant{
+    function Stake(uint256 _amount) external nonReentrant UpdateReward(msg.sender){
         if(_amount == 0){
             revert Transfer_Failed();
         }
@@ -60,7 +84,7 @@ contract Staking is ReentrancyGuard{
     // transfer to the user
     // Emit the amount withdrawed and the address
 
-    function Withdraw(uint _amount) external nonReentrant{
+    function Withdraw(uint _amount) external nonReentrant UpdateReward(msg.sender){
         if(_amount < s_balances[msg.sender]){
             revert Transfer_Failed();
         }
@@ -81,7 +105,7 @@ contract Staking is ReentrancyGuard{
     // transfer the reward to the user
     // Emit the amount token and the address
 
-    function Claim() public{
+    function Claim() external nonReentrant UpdateReward(msg.sender) {
         uint256 amount = s_rewards[msg.sender];
         s_rewards[msg.sender] = 0;
         bool success = RewardToken.transfer(msg.sender, amount);
