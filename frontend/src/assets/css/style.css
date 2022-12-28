@@ -243,7 +243,7 @@ label {
 	letter-spacing: .5px;
 	line-height: 1;
 	margin-bottom: 0;
-	padding: 25px 50px;
+	padding: 20px 30px;
 	text-align: center;
 	text-transform: uppercase;
 	touch-action: manipulation;
@@ -368,14 +368,14 @@ label {
 .navbar-wrap > ul > li {
 	display: block;
 	position: relative;
-	margin-right: 65px;
+	margin-right: 40px;
 }
 .navbar-wrap > ul > li > a {
     font-size: 14px;
     font-weight: 600;
     text-transform: uppercase;
     color: #FFFFFF;
-    padding: 45px 0;
+    padding: 20px 0;
     display: block;
     line-height: 1;
     position: relative;
@@ -1086,7 +1086,7 @@ label {
 }
 
 /* banner-two */
-.banner-area-two {
+/* .banner-area-two {
 	position: relative;
 	padding: 225px 0 0;
 	z-index: 1;
@@ -1179,7 +1179,7 @@ label {
 	transform: rotate(-90deg);
 	margin-bottom: 120px;
 	opacity: 0.4;
-}
+} */
 
 
 /* 5. Breadcrumb */
@@ -1388,9 +1388,13 @@ label {
 	margin-top: -1px;
 	cursor: pointer;
 }
+section{
+	margin-top: 10%;
+}
 .partner-wrap ul li img {
 	opacity: .5;
 	transition: .3s linear;
+	width: 50%;
 }
 .partner-wrap ul li:hover img {
 	opacity: 1;
