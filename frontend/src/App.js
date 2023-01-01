@@ -5,6 +5,7 @@ import Partner from "./components/Partner";
 import About from "./components/About";
 import WhyUs from "./components/WhyUs";
 import Team from "./components/Team";
+import Contact from "./components/Contact";
 function App() {
   return (
     <div>
@@ -15,6 +16,7 @@ function App() {
         <About />
         <WhyUs />
         <Team />
+        <Contact />
       </main>
     </div>
   );
