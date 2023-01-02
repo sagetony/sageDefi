@@ -6,6 +6,7 @@ import About from "./components/About";
 import WhyUs from "./components/WhyUs";
 import Team from "./components/Team";
 import Contact from "./components/Contact";
+import Footer from "./components/Footer";
 function App() {
   return (
     <div>
@@ -18,6 +19,7 @@ function App() {
         <Team />
         <Contact />
       </main>
+      <Footer logo = {logo} />
     </div>
   );
 }

@@ -1,8 +1,8 @@
 import React from 'react'
-import Stella from "../assets/img/team/team_img05.png"
+import Stella from "../assets/img/team/stella.jpg"
 import Tony from "../assets/img/team/anthony.jpg"
-import Nonny from "../assets/img/team/team_img02.png"
-import Kingdom from "../assets/img/team/team_img03.png"
+import Nonny from "../assets/img/team/nonny.jpg"
+import Kingdom from "../assets/img/team/kingdom.jpg"
 const Team = () => {
   return (
     <div>
@@ -77,7 +77,7 @@ const Team = () => {
                 </div>
                 <div class="team-content">
                   <h2 class="title">Eleru Kingdom</h2>
-                  <span>Vp People</span>
+                  <span>No Code Developer</span>
                   <ul class="team-social">
                     <li>
                       <a href="#d"><i class="fab fa-youtube"></i></a>
