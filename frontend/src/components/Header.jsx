@@ -11,6 +11,9 @@ import { FaFacebook } from 'react-icons/fa';
 import {FaTimes} from 'react-icons/fa';
 import { Button } from 'react-bootstrap';
 
+import { Outlet, Link } from "react-router-dom";
+
+
 
 
 function Header({logo}) {
@@ -35,15 +38,15 @@ function Header({logo}) {
                                     </div>
                                     <div className="navbar-wrap main-menu d-lg-flex">
                                         <ul className="navigation">
-                                            <li className="active menu-item-has-children"><a href="#header" className="section-link">Home</a>
+                                            <li className="active menu-item-has-children"><Link to="/" className="section-link">Home</Link>
                                             </li>
-                                            <li><a href="#about" className="section-link">About us</a></li>
-                                            <li><a href="#sales" className="section-link">ICO</a></li>
-                                            <li><a href="#roadmap" className="section-link">Staking</a></li>
-                                            <li><a href="#contact" className="section-link">NFT</a></li>
-                                            <li><a href="#contact" className="section-link">Admin</a></li>
-                                            <li><a href="#contact" className="section-link">Team</a></li>
-                                            <li><a href="#contact" className="section-link">Contact us</a></li>
+                                            <li><Link to="/#about" className="section-link">About us</Link></li>
+                                            <li><Link to="/#about" className="section-link">ICO</Link></li>
+                                            <li><Link to="/staking" className="section-link">Staking</Link></li>
+                                            {/* <li><a href="#nft" className="section-link">NFT</a></li> */}
+                                            <li><Link to="/admin" className="section-link">Admin</Link></li>
+                                            <li><Link to="/#team" className="section-link">Team</Link></li>
+                                            <li><Link to="/#contact" className="section-link">Contact us</Link></li>
                                         </ul>
                                     </div>
                                     <Button>Connect Wallet </Button>
@@ -82,6 +85,8 @@ function Header({logo}) {
             </div>
 
         </header>
+        <Outlet />
+
     </div>
   )
 }

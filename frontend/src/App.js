@@ -1,25 +1,20 @@
-import Header from "../src/components/Header";
-import logo from "../src/assets/img/logo/logo.png";
-import Banner from "./components/Banner";
-import Partner from "./components/Partner";
-import About from "./components/About";
-import WhyUs from "./components/WhyUs";
-import Team from "./components/Team";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
+import Home from "../src/pages/Home";
+import PageNotFound from "../src/pages/PageNotFound";
+import Admin from "../src/pages/Admin";
+import Staking from "../src/pages/Staking";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 function App() {
   return (
     <div>
-      <Header logo={logo} />
-      <main className="fix">
-        <Banner />
-        <Partner />
-        <About />
-        <WhyUs />
-        <Team />
-        <Contact />
-      </main>
-      <Footer logo = {logo} />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/staking" element={<Staking />} />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

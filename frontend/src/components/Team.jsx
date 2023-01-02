@@ -6,7 +6,7 @@ import Kingdom from "../assets/img/team/kingdom.jpg"
 const Team = () => {
   return (
     <div>
-       <section class="team-area pt-130" >
+       <section class="team-area pt-130" id='team'>
         <div class="container">
           <div class="row justify-content-center">
             <div class="col-xl-6">
