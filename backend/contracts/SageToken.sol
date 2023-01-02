@@ -52,7 +52,7 @@ contract SageToken is IERC20{
     }
 
     function approve(address spender, uint256 amount) public override returns (bool){
-        require(balances[msg.sender] > amount,"Insufficient Token Amount");
+        require(balances[msg.sender] >= amount,"Insufficient Token Amount");
         allowed[msg.sender][spender] += amount;
         emit Approval(msg.sender, spender, amount);
 
@@ -74,12 +74,16 @@ contract SageToken is IERC20{
         return true;
     }
 
-    function mint(uint256 amount) public Onlyadmin {
+    function mint(address to, uint256 amount) public Onlyadmin {
+        require(to != address(0), "0 Address");
+        balances[to] += amount;
         totalSupply += amount;
     }
     
     function burn(uint256 amount) public Onlyadmin{
+        require(msg.sender != address(0), "0 Address");
         totalSupply -= amount;
+        balances[msg.sender] -= amount;
     }
 
 }
