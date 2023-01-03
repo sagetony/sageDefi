@@ -4,6 +4,12 @@ import Admin from "../src/pages/Admin";
 import Staking from "../src/pages/Staking";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useState } from "react";
+import SagetokenAddress from "../src/abis/contractsData/SageToken-address.json";
+import SagetokenAbi from "../src/abis/contractsData/SageToken.json";
+import SagestakingAbi from "../src/abis/contractsData/Staking.json";
+import SagestakingAddress from "../src/abis/contractsData/Staking-address.json";
+import SageicoAbi from "../src/abis/contractsData/SageExchange.json";
+import SageicoAddress from "../src/abis/contractsData/SageExchange-address.json";
 
 function App() {
   const [account, setAccount] = useState(null);
@@ -22,8 +28,38 @@ function App() {
 
     // Get Signer
     const signer = provider.getSigner();
-    
+
+    // Helps Changes account when user switch accounts
+    window.ethereum.on("accountsChanged", async function (accounts) {
+      setAccount(account[0]);
+      await WebHandler();
+    });
+
+    // get contracts
+    const sagetoken = new ethers.Contract(
+      SagetokenAddress.address,
+      SagetokenAbi.abi,
+      signer
+    );
+    setSageToken(sagetoken);
+
+    const sageico = new ethers.Contract(
+      SageicoAddress.address,
+      SageicoAbi.abi,
+      signer
+    );
+    setSageico(sageico);
+
+    const sagestaking = new ethers.Contract(
+      SagestakingAddress.address,
+      SagestakingAbi.abi,
+      signer
+    );
+    setSagestaking(sagestaking);
   };
+  useEffect(() => {
+    WebHandler();
+  }, []);
   return (
     <div>
       <BrowserRouter>
