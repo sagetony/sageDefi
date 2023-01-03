@@ -20,13 +20,18 @@ async function main() {
     console.log("Deploying contracts with the Staking account:", staking.address)
 
     // Save copies of each contracts abi and address to the frontend.
-    // saveFrontendFiles(token, "Token")
-    // saveFrontendFiles(sageico, "SageICO")
+    saveFrontendFiles(token, "SageToken")
+    saveFrontendFiles(sageico, "SageExchange")
+    saveFrontendFiles(staking, "Staking")
 }
 
 function saveFrontendFiles(contract, name) {
+    const path = require("path")
     const fs = require("fs")
-    const contractsDir = process.cwd() + "/src/abis/contractsData"
+    const newPath = path.join(__dirname, "../../")
+
+    const contractsDir = newPath + "frontend/src/abis/contractsData"
+    // console.log(contractsDir)
 
     if (!fs.existsSync(contractsDir)) {
         fs.mkdirSync(contractsDir)

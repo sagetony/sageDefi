@@ -27,7 +27,7 @@ const Team = () => {
                 </div>
                 <div class="team-content">
                   <h2 class="title">Nwachukwu Anthony </h2>
-                  <span>Founder & CO</span>
+                  <span>Blockchain Developer</span>
                   <ul class="team-social">
                     <li>
                       <a href="#d"><i class="fab fa-youtube"></i></a>
@@ -52,7 +52,7 @@ const Team = () => {
                 </div>
                 <div class="team-content">
                   <h2 class="title">Nwosu Chinoso</h2>
-                  <span>Product Manager</span>
+                  <span>Product Designer</span>
                   <ul class="team-social">
                     <li>
                       <a href="#d"><i class="fab fa-youtube"></i></a>

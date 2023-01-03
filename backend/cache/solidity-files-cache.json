@@ -47,8 +47,8 @@
       ]
     },
     "C:\\BlockchainProject\\SageICO\\backend\\contracts\\SageToken.sol": {
-      "lastModificationDate": 1671611190640,
-      "contentHash": "d44c8a4cceaed522e0011a407f689ade",
+      "lastModificationDate": 1672736786552,
+      "contentHash": "b61dfd861a38c7d14aa14e50eb53031f",
       "sourceName": "contracts/SageToken.sol",
       "solcConfig": {
         "version": "0.8.9",
@@ -262,6 +262,44 @@
         "SageIco",
         "SageTokens"
       ]
+    },
+    "C:\\BlockchainProject\\SageICO\\backend\\contracts\\Lending.sol": {
+      "lastModificationDate": 1672736786552,
+      "contentHash": "d41d8cd98f00b204e9800998ecf8427e",
+      "sourceName": "contracts/Lending.sol",
+      "solcConfig": {
+        "version": "0.8.9",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [],
+      "artifacts": []
     }
   }
 }
