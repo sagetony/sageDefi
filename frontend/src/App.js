@@ -3,7 +3,8 @@ import PageNotFound from "../src/pages/PageNotFound";
 import Admin from "../src/pages/Admin";
 import Staking from "../src/pages/Staking";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { ethers } from "ethers";
 import SagetokenAddress from "../src/abis/contractsData/SageToken-address.json";
 import SagetokenAbi from "../src/abis/contractsData/SageToken.json";
 import SagestakingAbi from "../src/abis/contractsData/Staking.json";
@@ -16,8 +17,9 @@ function App() {
   const [sagetoken, setSageToken] = useState(null);
   const [sageico, setSageico] = useState(null);
   const [sagestaking, setSagestaking] = useState(null);
-  // Connect to Metamask
-  const WebHandler = async () => {
+  const [signer, setSigner] = useState(null);
+
+  const WebHandler = useCallback(async () => {
     // get the account in metamask
     const accounts = await window.ethereum.request({
       method: "eth_requestAccounts",
@@ -28,6 +30,10 @@ function App() {
 
     // Get Signer
     const signer = provider.getSigner();
+    setSigner(signer);
+    // console.log(signer);
+
+    // console.log("signer");
 
     // Helps Changes account when user switch accounts
     window.ethereum.on("accountsChanged", async function (accounts) {
@@ -56,17 +62,34 @@ function App() {
       signer
     );
     setSagestaking(sagestaking);
-  };
+  }, [account]);
+
   useEffect(() => {
     WebHandler();
-  }, []);
+  }, [WebHandler]);
+
+  console.log(sagetoken.name());
+
   return (
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route
+            path="/"
+            element={
+              <Home
+                WebHandler={WebHandler}
+                sageico={sageico}
+                sagetoken={sagetoken}
+                account={account}
+              />
+            }
+          />
           <Route path="/admin" element={<Admin />} />
-          <Route path="/staking" element={<Staking />} />
+          <Route
+            path="/staking"
+            element={<Staking sagestaking={sagestaking} />}
+          />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>

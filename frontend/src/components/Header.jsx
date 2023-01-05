@@ -16,7 +16,7 @@ import { Outlet, Link } from "react-router-dom";
 
 
 
-function Header({logo}) {
+function Header({logo, WebHandler, account}) {
     // const [isNone, setIsDisplay] = useState('')
     // const onclick = () => {
     //     if
@@ -49,7 +49,12 @@ function Header({logo}) {
                                             <li><Link to="/#contact" className="section-link">Contact us</Link></li>
                                         </ul>
                                     </div>
-                                    <Button>Connect Wallet </Button>
+
+                                    {account ? ( <Button>{account.slice(0, 5) + "..." + account.slice(38, 42)}</Button>
+                                    
+                                    ) : ( <Button onClick={WebHandler}>Connect Wallet </Button>
+                                        
+                                        )}
 
                                     {/* <div className="header-action d-none d-md-block">
                                         <ul>

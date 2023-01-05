@@ -1,6 +1,37 @@
 import React from 'react'
+import { useCallback } from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
 
-const Banner = () => {
+const Banner = ({sageico, sagetoken }) => {
+    // const [symbol, setSymbol] = useState(null)
+    // const [tokenamount, setTokenamount] = useState(null)
+    // const [totaltoken, setTotaltoken] = useState(null)
+
+    // const icoInvest = async () => {
+    //     await sageico.ICOInvest();
+    // }
+    //  const loadsageDefi = useCallback (async () => {
+    //     const tokenSymbol = await sagetoken;
+    //     setSymbol(tokenSymbol)
+    //     console.log(await sagetoken)
+    //     console.log("dsd")
+
+    //     const tokenAmount = await sageico.getTokenAmount();
+    //     setTokenamount(tokenAmount)
+    //     const totalToken = await sageico.getTokenPurchase();
+    //     setTotaltoken(totalToken)}, [sagetoken, sageico])
+     
+    // useEffect(() => {
+    //     const aa = async () => {
+    //         console.log(await sagetoken.address)
+
+    //         console.log(await sagetoken.abi)
+
+    //     }
+    //     aa()
+    // }, [])
+
   return (
     <div>
         <section className="banner-area banner-bg">
@@ -50,7 +81,7 @@ const Banner = () => {
           ></div>
           </div> */}
           <h4 className="title">
-          65% target raised <span>1 ETH = $1000 = 3177.38 CIC</span>
+          {/* {totaltoken} Purchased <span>1 {symbol} = {tokenamount} ETH</span> */}
           </h4>
       </div>
       </div>

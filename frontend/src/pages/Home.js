@@ -9,12 +9,12 @@ import Team from "../components/Team";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer";
 
-const Home = () => {
+const Home = ({ WebHandler, account, sageico, sagetoken }) => {
   return (
     <div>
-      <Header logo={logo} />
+      <Header logo={logo} WebHandler={WebHandler} account={account} />
       <main className="fix">
-        <Banner />
+        <Banner sageico={sageico} sagetoken={sagetoken} />
         <Partner />
         <About />
         <WhyUs />
