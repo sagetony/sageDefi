@@ -18,7 +18,7 @@ const Banner = ({sageico, sagetoken }) => {
         setTokenamount(ethers.utils.formatEther(tokenAmount))
 
         const totalToken = (await sageico.getTokenPurchase()).toString();
-        setTotaltoken(ethers.utils.formatEther(totalToken))
+        setTotaltoken((totalToken).toString())
     }, [sagetoken, sageico])
 
     

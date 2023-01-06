@@ -52,9 +52,9 @@ const About = ({sageico}) => {
                 {/* <Button onClick={icoInvest}>Purchase Tokens</Button> */}
                 <Form onSubmit={icoInvest}>
                   <div className="row">
-                    <div className="col-md-3">
+                    <div className="col-md-4">
                       <Form.Group className="mb-3" controlId="formBasicPassword">
-                        <Form.Label>Amount of Token</Form.Label>
+                        <Form.Label>Amount in ETH</Form.Label>
                         <Form.Control
                           type="number"
                           placeholder="Amount of Token to Burn" value={amount} onChange={handleChange}
@@ -63,7 +63,6 @@ const About = ({sageico}) => {
                     </div>
                   </div>
                    <Button type='submit' >Purchase Tokens</Button>
-
                 </Form>
 
             </div>
