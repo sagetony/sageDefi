@@ -16,7 +16,7 @@ const Home = ({ WebHandler, account, sageico, sagetoken }) => {
       <main className="fix">
         <Banner sageico={sageico} sagetoken={sagetoken} />
         <Partner />
-        <About />
+        <About sageico={sageico} />
         <WhyUs />
         <Team />
         <Contact />

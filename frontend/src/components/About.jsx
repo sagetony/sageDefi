@@ -1,8 +1,24 @@
-import React from 'react'
+import { ethers } from 'ethers'
+import React, { useState } from 'react'
+import { Button, Form } from 'react-bootstrap'
 import aboutUsImageOne from "../assets/img/images/about_img01.png"
 import aboutUsImageTwo from "../assets/img/images/about_img02.png"
 
-const About = () => {
+const About = ({sageico}) => {
+  const [amount, setAmount] = useState(0);
+
+  const handleChange = (event) => {
+    setAmount(event.target.value);
+  }
+   const icoInvest = async(event) => {
+    event.preventDefault();
+    let amountETH = ethers.utils.parseEther(amount)
+        await sageico.ICOInvest({ value: amountETH });
+        console.log("Successful")
+        setAmount(0)
+
+    }
+
   return (
     <div>
       <section id="about" className="about-area pt-130 pb-130" style={{ marginTop: 100 }}>
@@ -32,7 +48,24 @@ const About = () => {
                 platform helps investors to make easy to purchase and sell
                 their tokens
                 </p>
-                <a href="#about" className="btn">Purchase Tokens</a>
+                {/* <a href="#about" className="btn"></a> */}
+                {/* <Button onClick={icoInvest}>Purchase Tokens</Button> */}
+                <Form onSubmit={icoInvest}>
+                  <div className="row">
+                    <div className="col-md-3">
+                      <Form.Group className="mb-3" controlId="formBasicPassword">
+                        <Form.Label>Amount of Token</Form.Label>
+                        <Form.Control
+                          type="number"
+                          placeholder="Amount of Token to Burn" value={amount} onChange={handleChange}
+                        />
+                      </Form.Group>
+                    </div>
+                  </div>
+                   <Button type='submit' >Purchase Tokens</Button>
+
+                </Form>
+
             </div>
             </div>
         </div>

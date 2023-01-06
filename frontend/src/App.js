@@ -17,8 +17,6 @@ function App() {
   const [sagetoken, setSageToken] = useState(null);
   const [sageico, setSageico] = useState(null);
   const [sagestaking, setSagestaking] = useState(null);
-  const [signer, setSigner] = useState(null);
-  const [network, setNetwork] = useState(null);
 
   const WebHandler = useCallback(async () => {
     // get the account in metamask
@@ -28,12 +26,9 @@ function App() {
     setAccount(accounts[0]);
     // Get the provider from Metamask
     const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const network = await provider.getNetwork();
-    setNetwork(network);
 
     // Get Signer
     const signer = provider.getSigner();
-    setSigner(signer);
     // console.log(signer);
 
     // console.log("signer");
@@ -70,11 +65,6 @@ function App() {
   useEffect(() => {
     WebHandler();
   }, [WebHandler]);
-
-  console.log("signer");
-  console.log(signer);
-  console.log(sagetoken);
-  console.log(sagetoken.name());
 
   return (
     <div>

@@ -1,36 +1,31 @@
+import { ethers } from 'ethers';
 import React from 'react'
 import { useCallback } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
 const Banner = ({sageico, sagetoken }) => {
-    // const [symbol, setSymbol] = useState(null)
-    // const [tokenamount, setTokenamount] = useState(null)
-    // const [totaltoken, setTotaltoken] = useState(null)
+    const [symbol, setSymbol] = useState(null)
+    const [tokenamount, setTokenamount] = useState(null)
+    const [totaltoken, setTotaltoken] = useState(null)
 
-    // const icoInvest = async () => {
-    //     await sageico.ICOInvest();
-    // }
-    //  const loadsageDefi = useCallback (async () => {
-    //     const tokenSymbol = await sagetoken;
-    //     setSymbol(tokenSymbol)
-    //     console.log(await sagetoken)
-    //     console.log("dsd")
+   
+     const loadsageDefi = useCallback (async () => {
+        const tokenSymbol = await sagetoken.symbol();
+        setSymbol(tokenSymbol)
 
-    //     const tokenAmount = await sageico.getTokenAmount();
-    //     setTokenamount(tokenAmount)
-    //     const totalToken = await sageico.getTokenPurchase();
-    //     setTotaltoken(totalToken)}, [sagetoken, sageico])
+        const tokenAmount = (await sageico.getTokenAmount()).toString();
+        setTokenamount(ethers.utils.formatEther(tokenAmount))
+
+        const totalToken = (await sageico.getTokenPurchase()).toString();
+        setTotaltoken(ethers.utils.formatEther(totalToken))
+    }, [sagetoken, sageico])
+
+    
+    useEffect(() => {
+        loadsageDefi()
+    }, [loadsageDefi])
      
-    // useEffect(() => {
-    //     const aa = async () => {
-    //         console.log(await sagetoken.address)
-
-    //         console.log(await sagetoken.abi)
-
-    //     }
-    //     aa()
-    // }, [])
 
   return (
     <div>
@@ -66,9 +61,9 @@ const Banner = ({sageico, sagetoken }) => {
       </div>
       <div className="banner-progress-wrap">
           <ul>
-          <li>Pre Sell</li>
-          <li>Soft Cap</li>
-          <li>Bonus</li>
+          <li>Total Purchased</li>
+          {/* <li>Soft Cap</li> */}
+          <li>Price of {symbol} </li>
           </ul>
           {/* <div className="progress">
           <div
@@ -81,7 +76,7 @@ const Banner = ({sageico, sagetoken }) => {
           ></div>
           </div> */}
           <h4 className="title">
-          {/* {totaltoken} Purchased <span>1 {symbol} = {tokenamount} ETH</span> */}
+          {totaltoken} Purchased <span>1 {symbol} = {tokenamount} ETH</span>
           </h4>
       </div>
       </div>
