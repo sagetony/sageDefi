@@ -2,6 +2,7 @@ import Home from "../src/pages/Home";
 import PageNotFound from "../src/pages/PageNotFound";
 import Admin from "../src/pages/Admin";
 import Staking from "../src/pages/Staking";
+import logo from "../src/assets/img/logo/logo.png";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
 import { ethers } from "ethers";
@@ -84,7 +85,13 @@ function App() {
           <Route path="/admin" element={<Admin />} />
           <Route
             path="/staking"
-            element={<Staking sagestaking={sagestaking} />}
+            element={
+              <Staking
+                sagestaking={sagestaking}
+                account={account}
+                logo={logo}
+              />
+            }
           />
           <Route path="*" element={<PageNotFound />} />
         </Routes>

@@ -4,10 +4,11 @@ import Header from "../components/Header";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-const Staking = () => {
+const Staking = (props) => {
   return (
     <div>
-      <Header />
+      {/* {console.log({ account })}; */}
+      <Header {...props} />
       <div className="container">
         <h2 style={{ textAlign: "center", marginTop: 50 }}>
           Stake your SAG Token

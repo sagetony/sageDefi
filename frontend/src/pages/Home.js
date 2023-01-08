@@ -1,6 +1,5 @@
 import React from "react";
 import Header from "../components/Header";
-import logo from "../assets/img/logo/logo.png";
 import Banner from "../components/Banner";
 import Partner from "../components/Partner";
 import About from "../components/About";
@@ -9,7 +8,7 @@ import Team from "../components/Team";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer";
 
-const Home = ({ WebHandler, account, sageico, sagetoken }) => {
+const Home = ({ WebHandler, account, sageico, sagetoken, logo }) => {
   return (
     <div>
       <Header logo={logo} WebHandler={WebHandler} account={account} />
