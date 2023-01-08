@@ -66,7 +66,7 @@ function App() {
   useEffect(() => {
     WebHandler();
   }, [WebHandler]);
-
+  // console.log(sagestaking);
   return (
     <div>
       <BrowserRouter>
@@ -90,6 +90,7 @@ function App() {
                 sagestaking={sagestaking}
                 account={account}
                 logo={logo}
+                WebHandler={WebHandler}
               />
             }
           />

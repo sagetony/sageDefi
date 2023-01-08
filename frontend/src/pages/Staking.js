@@ -5,9 +5,10 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
 const Staking = (props) => {
+  const sagestaking = props.sagestaking;
+  console.log(sagestaking);
   return (
     <div>
-      {/* {console.log({ account })}; */}
       <Header {...props} />
       <div className="container">
         <h2 style={{ textAlign: "center", marginTop: 50 }}>
@@ -19,10 +20,7 @@ const Staking = (props) => {
             <div className="col-md-6">
               <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>Amount of Token</Form.Label>
-                <Form.Control
-                  type="number"
-                  placeholder="Amount of Token to Burn"
-                />
+                <Form.Control type="number" placeholder="Amount of Token" />
               </Form.Group>
             </div>
           </div>
