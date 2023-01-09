@@ -66,7 +66,6 @@ function App() {
   useEffect(() => {
     WebHandler();
   }, [WebHandler]);
-  // console.log(sagestaking);
   return (
     <div>
       <BrowserRouter>
@@ -79,6 +78,7 @@ function App() {
                 sageico={sageico}
                 sagetoken={sagetoken}
                 account={account}
+                logo={logo}
               />
             }
           />

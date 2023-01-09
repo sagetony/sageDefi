@@ -6,6 +6,8 @@ import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 contract SageExchange is SageToken, ReentrancyGuard{
     // Ico
+    IERC20 immutable public StakingToken;
+
     enum ICOState{
         START, END, PAUSE, NEVERSTART
     }
@@ -27,8 +29,8 @@ contract SageExchange is SageToken, ReentrancyGuard{
     event UpdatedadminAdress(address indexed adminaddress);
     event Invest(uint256 amount, uint256 tokens, address indexed buyer);
 
-    constructor (address payable _admin){
-
+    constructor (address payable _admin, address _stakingaddress){
+        StakingToken = IERC20(_stakingaddress);
         s_admin = _admin;
         s_tokenprice = 0.001 ether;
         s_hardcap = 5 ether;
@@ -76,7 +78,14 @@ contract SageExchange is SageToken, ReentrancyGuard{
             s_icostate = ICOState.PAUSE;
         }
     }
+
+
+        function tokenBalance() public view returns(uint256){
+                return StakingToken.balanceOf(address(this));
+
+        }
         
+   
     function ICOInvest() payable external  nonReentrant returns(bool){
         uint256 amount = msg.value;
         require(amount >= s_minimum, "Enter a Valid Amount, Minimum amount is 0.001 ETH");
@@ -92,7 +101,13 @@ contract SageExchange is SageToken, ReentrancyGuard{
         s_totalamountdeposited += amount;
         s_userBalances[msg.sender] +=amount;
         (bool success, ) = s_admin.call{value: amount}("");
+        StakingToken.approve(address(this), numberoftokens);
 
+        bool done = StakingToken.transferFrom(owner, msg.sender, numberoftokens);
+
+        if(!done){
+            revert("Failed");
+        }
         if(!success){
             revert("Failed");
         }

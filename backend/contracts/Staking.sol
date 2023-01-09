@@ -79,6 +79,7 @@ contract Staking is ReentrancyGuard{
         s_balances[msg.sender] += _amount;
         emit StakingEvent(_amount, msg.sender);
         bool success = StakingToken.transferFrom(msg.sender, address(this), _amount);
+        
         if(!success){
             revert Transfer_Failed();
         }

@@ -7,8 +7,9 @@ import aboutUsImageTwo from "../assets/img/images/about_img02.png"
 const About = ({sageico}) => {
   const [amount, setAmount] = useState(0);
 
-  const handleChange = (event) => {
+  const handleChange = async (event) => {
     setAmount(event.target.value);
+
   }
    const icoInvest = async(event) => {
     event.preventDefault();
@@ -18,7 +19,6 @@ const About = ({sageico}) => {
         setAmount(0)
 
     }
-
   return (
     <div>
       <section id="about" className="about-area pt-130 pb-130" style={{ marginTop: 100 }}>

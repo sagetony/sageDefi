@@ -12,7 +12,10 @@ async function main() {
 
     // deploy contracts
     const token = await Token.deploy()
-    const sageico = await SageICO.deploy("0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266")
+    const sageico = await SageICO.deploy(
+        "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+        token.address
+    )
     const staking = await Staking.deploy(token.address, token.address)
 
     console.log(await token.name())
