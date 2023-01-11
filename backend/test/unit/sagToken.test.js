@@ -25,7 +25,10 @@ describe("SageToken", function () {
 
         // deploy contract
         sagetoken = await SageToken.deploy()
-        sageico = await sageICO.deploy("0x90F79bf6EB2c4f870365E785982E1f101E93b906")
+        sageico = await sageICO.deploy(
+            "0x90F79bf6EB2c4f870365E785982E1f101E93b906",
+            sagetoken.address
+        )
         staking = await Staking.deploy(sagetoken.address, sagetoken.address)
 
         // Deployer Address

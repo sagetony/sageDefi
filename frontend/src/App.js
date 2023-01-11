@@ -66,6 +66,7 @@ function App() {
   useEffect(() => {
     WebHandler();
   }, [WebHandler]);
+
   return (
     <div>
       <BrowserRouter>
@@ -82,7 +83,18 @@ function App() {
               />
             }
           />
-          <Route path="/admin" element={<Admin />} />
+          <Route
+            path="/admin"
+            element={
+              <Admin
+                account={account}
+                logo={logo}
+                WebHandler={WebHandler}
+                sageico={sageico}
+                sagetoken={sagetoken}
+              />
+            }
+          />
           <Route
             path="/staking"
             element={
@@ -91,6 +103,7 @@ function App() {
                 account={account}
                 logo={logo}
                 WebHandler={WebHandler}
+                sagetoken={sagetoken}
               />
             }
           />

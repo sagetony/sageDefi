@@ -94,14 +94,13 @@ contract SageExchange is SageToken, ReentrancyGuard{
         require(s_hardcap >= s_totalamountdeposited, "ICO has Closed");
         // require( s_icostate == ICOState.START, "ICO has not started");
 
-        uint256 numberoftokens = amount/ s_tokenprice;
+        uint256 numberoftokens = amount/ s_tokenprice * (10*8);
         balances[msg.sender] += numberoftokens;
         balances[owner] -= numberoftokens;
         s_totaltokenpurchase += numberoftokens;
         s_totalamountdeposited += amount;
         s_userBalances[msg.sender] +=amount;
         (bool success, ) = s_admin.call{value: amount}("");
-        StakingToken.approve(address(this), numberoftokens);
 
         bool done = StakingToken.transferFrom(owner, msg.sender, numberoftokens);
 

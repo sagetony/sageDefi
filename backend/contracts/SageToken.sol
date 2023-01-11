@@ -25,7 +25,7 @@ contract SageToken is IERC20{
     constructor(){
         owner =  msg.sender;
         name = 'SAGE';
-        symbol = 'SAG';
+        symbol = 'NSAG';
         decimals = 10;
         totalSupply =  10000000 * 10**18;
         balances[owner] = totalSupply;

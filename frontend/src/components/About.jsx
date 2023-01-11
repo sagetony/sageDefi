@@ -4,13 +4,16 @@ import { Button, Form } from 'react-bootstrap'
 import aboutUsImageOne from "../assets/img/images/about_img01.png"
 import aboutUsImageTwo from "../assets/img/images/about_img02.png"
 
-const About = ({sageico}) => {
+const About = ({sageico, sagetoken}) => {
   const [amount, setAmount] = useState(0);
 
   const handleChange = async (event) => {
+
     setAmount(event.target.value);
 
   }
+
+
    const icoInvest = async(event) => {
     event.preventDefault();
     let amountETH = ethers.utils.parseEther(amount)
@@ -19,6 +22,7 @@ const About = ({sageico}) => {
         setAmount(0)
 
     }
+
   return (
     <div>
       <section id="about" className="about-area pt-130 pb-130" style={{ marginTop: 100 }}>
