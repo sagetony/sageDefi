@@ -1,5 +1,5 @@
 # SageDefi
-This is a DeFi application built on Hardhat, with smart contracts written in Solidity and the frontend built with React. The application includes an ERC20 token contract, an IOC contract, and a staking contract.
+This is a DeFi application built on Hardhat, with smart contracts written in Solidity and the frontend built with React. The application includes an ERC20 token contract, an ICO contract, and a staking contract.
 
 ![SageDefi](https://sage-defi.vercel.app/static/media/about_img01.92aec9a4de2f58631598.png)
 
