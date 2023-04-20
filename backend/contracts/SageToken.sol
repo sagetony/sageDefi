@@ -19,6 +19,8 @@ contract SageToken is IERC20{
     mapping (address => uint256) public balances;
     mapping(address => mapping(address => uint256)) allowed;
  
+    mapping (address => bool) public blacklist;
+
     // Events
     // event Transfer(address indexed from, address indexed to, uint256 value);
     
@@ -35,11 +37,15 @@ contract SageToken is IERC20{
         require(msg.sender == owner, "Only Admin has permission");
         _;  
     }
+    modifier validAddress(address _address){
+        require(_address != address(0));
+        _;
+    }
     // functions
     function balanceOf(address tokenAddress) public override view returns (uint256){
             return balances[tokenAddress];    
     }
-    function transfer(address to, uint256 tokens) public override returns (bool){
+    function transfer(address to, uint256 tokens) validAddress(to) public override returns (bool){
        require(balances[msg.sender] >= tokens, "Insufficient Token Amount");
         balances[to] += tokens;
         balances[msg.sender] -=  tokens;
@@ -47,11 +53,11 @@ contract SageToken is IERC20{
         return true;
     }
 
-    function allowance(address _owner, address spender) public override  view returns (uint256){
+    function allowance(address _owner, address spender) validAddress(spender) public override  view returns (uint256){
         return allowed[_owner][spender];
     }
 
-    function approve(address spender, uint256 amount) public override returns (bool){
+    function approve(address spender, uint256 amount) validAddress(spender) public override returns (bool){
         require(balances[msg.sender] >= amount,"Insufficient Token");
         allowed[msg.sender][spender] += amount;
         emit Approval(msg.sender, spender, amount);
@@ -63,7 +69,7 @@ contract SageToken is IERC20{
         address from,
         address to,
         uint256 amount
-    ) public override returns (bool){
+    )  validAddress(to) public  override returns (bool){
         require(allowed[from][msg.sender] >= amount, "Insufficient Amount");
         require(balances[from] >= amount, "Insufficient Token Amount");
 
@@ -84,6 +90,14 @@ contract SageToken is IERC20{
         require(msg.sender != address(0), "0 Address");
         totalSupply -= amount;
         balances[msg.sender] -= amount;
+    }
+    
+    function blacklistAddress(address _user) external  validAddress( _user) Onlyadmin {
+        blacklist[_user] = true;
+    }
+    
+    function unBlacklistAddress(address _user) external validAddress( _user)  Onlyadmin {
+        blacklist[_user] = false;
     }
 
 }
