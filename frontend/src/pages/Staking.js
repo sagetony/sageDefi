@@ -18,24 +18,20 @@ const Staking = (props) => {
   const stakeToken = async (event) => {
     event.preventDefault();
     // let amountETH = ethers.utils.parseEther(amount);
-    await sagetoken.approve(
-      "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
-      amount
-    );
+    await sagetoken.approve(sagestaking.address, amount);
     await sagestaking.Stake(amount);
     const earnedAmount = (await sagestaking.earned(account)).toString();
     setearned(earnedAmount);
-    // console.log("Successful");
-    // setAmount(0);
+    setAmount(0);
   };
-  // const earnedAmountFunc = async () => {
-  //   await sagestaking.Stake(amount);
-  //   const earnedAmount = (await sagestaking.earned(account)).toString();
-  //   setearned(earnedAmount);
-  // };
-  // useEffect(() => {
-  //   earnedAmountFunc();
-  // });
+  const claimToken = async () => {
+    console.log(earned);
+    await sagetoken.approve(sagestaking.address, earned);
+    console.log(earned);
+    await sagestaking.Claim();
+    console.log("successful");
+  };
+  // console.log(earned);
 
   return (
     <div>
@@ -64,6 +60,14 @@ const Staking = (props) => {
           </Button>
         </Form>
         <h3 className="mt-4">You have earned {earned} SAG tokens</h3>
+        <Button
+          variant="primary"
+          type="submit"
+          className="mt-4"
+          onClick={claimToken}
+        >
+          Claim Token
+        </Button>
       </div>
       <Contact />
     </div>

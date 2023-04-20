@@ -35,7 +35,7 @@ contract SageToken is IERC20{
         require(msg.sender == owner, "Only Admin has permission");
         _;  
     }
-
+    // functions
     function balanceOf(address tokenAddress) public override view returns (uint256){
             return balances[tokenAddress];    
     }

@@ -17,10 +17,7 @@ const Admin = (props) => {
     let decimals = (await sagetoken.decimals()).toString();
     // console.log(decimals);
 
-    await sagetoken.approve(
-      "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
-      amount * (10 * decimals)
-    );
+    await sagetoken.approve(sagetoken.address, amount * (10 * decimals));
     console.log("Successful");
     setAmount(0);
   };

@@ -116,7 +116,8 @@ contract Staking is ReentrancyGuard{
     function Claim() external nonReentrant UpdateReward(msg.sender) {
         uint256 amount = s_rewards[msg.sender];
         s_rewards[msg.sender] = 0;
-        bool success = RewardToken.transfer(msg.sender, amount);
+        bool success = RewardToken.transferFrom(address(this), msg.sender, amount);
+        
         if(!success){
             revert Transfer_Failed();
         }
