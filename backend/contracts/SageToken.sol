@@ -80,19 +80,17 @@ contract SageToken is IERC20{
         return true;
     }
 
-    function mint(address to, uint256 amount) public Onlyadmin {
-        require(to != address(0), "0 Address");
+    function mint(address to, uint256 amount) public validAddress(msg.sender) Onlyadmin {
         balances[to] += amount;
         totalSupply += amount;
     }
     
-    function burn(uint256 amount) public Onlyadmin{
-        require(msg.sender != address(0), "0 Address");
+    function burn(uint256 amount) public validAddress(msg.sender) Onlyadmin {
         totalSupply -= amount;
         balances[msg.sender] -= amount;
     }
     
-    function blacklistAddress(address _user) external  validAddress( _user) Onlyadmin {
+    function blacklistAddress(address _user) external validAddress( _user) Onlyadmin {
         blacklist[_user] = true;
     }
     

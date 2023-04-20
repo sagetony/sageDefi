@@ -47,8 +47,8 @@
       ]
     },
     "C:\\BlockchainProject\\SageICO\\backend\\contracts\\SageToken.sol": {
-      "lastModificationDate": 1673308148829,
-      "contentHash": "327372b07c4a8225391d4cd45046c781",
+      "lastModificationDate": 1682027744961,
+      "contentHash": "b8a66bf17467b09754fe8ca13d7f1103",
       "sourceName": "contracts/SageToken.sol",
       "solcConfig": {
         "version": "0.8.9",
