@@ -60,6 +60,7 @@ describe("SageToken", function () {
                 0
             )
         })
+        
         it("approve allowance", async function () {
             await expect(sagetoken.connect(deployer).approve(address1.address, 5))
                 .to.emit(sagetoken, "Approval")

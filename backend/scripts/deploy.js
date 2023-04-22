@@ -3,7 +3,6 @@ async function main() {
 
     console.log("Deploying contracts with the account:", deployer.address)
     console.log("Account balance:", (await deployer.getBalance()).toString())
-    // console.log("Account balance:", (await address1.getBalance()).toString())
     // 0x70997970C51812dc3A010C7d01b50e0d17dc79C8 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC
     // Get the ContractFactories and Signers here.
     const Token = await ethers.getContractFactory("SageToken")
@@ -36,7 +35,6 @@ function saveFrontendFiles(contract, name) {
     const newPath = path.join(__dirname, "../../")
 
     const contractsDir = newPath + "frontend/src/abis/contractsData"
-    // console.log(contractsDir)
 
     if (!fs.existsSync(contractsDir)) {
         fs.mkdirSync(contractsDir)
